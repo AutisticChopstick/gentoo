@@ -1,0 +1,15 @@
+CPU : Intel Corporation 8th Gen Core Processor i7-8700k
+
+GPU : Intel UHD Graphics 630
+
+GPU : AMD ATI Radeon RX 5600
+
+USB controller : Intel Corporation 200 Series/Z370 Chipset Family USB 3.0 xHCI Controller
+
+Chipset : Intel Corporation 200 Series/Z370 Chipset Family
+
+Network controller : Intel Corporation Wireless 8265 / 8275 (rev 78)
+
+Ethernet controller : Intel Corporation Ethernet Connection (2) I219-V
+
+Audio device : Intel Corporation 200 Series PCH HD Audo

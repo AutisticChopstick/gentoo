@@ -1,0 +1,231 @@
+Shutdown the PC
+
+Plug in ethernet
+
+Press power button
+
+Spam F11
+
+Select the Gentoo usb drive
+
+Select the "gentoo" kernel
+
+wipefs -a /dev/os-disk
+
+parted -a optimal /dev/os-disk
+
+mklabel gpt
+
+unit mib
+
+mkpart primary 1 3
+
+name 1 grub
+
+set 1 bios_grub on
+
+mkpart primary 3 131
+
+name 2 boot
+
+mkpart primary 131 -1
+
+name 3 rootfs
+
+print
+
+write (only if everything looks fine)
+
+quit
+
+lsblk
+
+mkfs.fat -F 32 /dev/os-disk2
+
+mkfs.ext4 /dev/os-disk3
+
+mkdir /mnt/gentoo
+
+mount /dev/os-disk3 /mnt/gentoo
+
+cd /mnt/gentoo
+
+ls
+
+date
+
+date MMDDhhmmYYYY
+
+links https://www.gentoo.org/downloads/mirrors/
+
+Select a close by mirror and download the stage3
+
+Copy your premade make.conf to /mnt/gentoo/etc/portage
+
+mkdir --parents /mnt/gentoo/etc/portage/repos.conf (only if it doesn't exist
+
+cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+
+cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+
+mount --types proc /proc /mnt/gentoo/proc
+
+mount --rbind /sys /mnt/gentoo/sys
+
+mount --make-rslave /mnt/gentoo/sys
+
+mount --rbind /dev /mnt/gentoo/dev
+
+mount --make-rslave /mnt/gentoo/dev
+
+chroot /mnt/gentoo /bin/bash
+
+source /etc/profile
+
+export PS1="(chroot) ${PS1}"
+
+mount /dev/sda2 /boot
+
+emerge-webrsync
+
+eselect profile list
+
+eselect profile set <number of the profile with nothing and the same version as the stage3>
+
+emerge --ask --verbose --update --deep --newuse @world
+
+ls /usr/share/zoneinfo
+
+echo "Canada/Toronto" > /etc/timezone (does not have to be "Canada/Toronto")
+
+emerge --config sys-libs/timezone-data
+
+vim /etc/locale.gen
+
+Find the desired locales (en_US.UTF-8 UTF-8) and try to find one for colemak and uncomment them
+
+locale-gen
+
+eselectt locale list
+
+eselect locale set <da one u want>
+
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+emerge --ask sys-kernel/gentoo-sources
+
+emerge --ask sys-apps/pciutils
+
+cd /usr/src/linux
+
+make menuconfig
+
+Go see the kernel options you need to enable in the separate file
+
+Exit, save and load
+
+make && make modules_install
+
+make install
+
+sudo emerge --ask udev
+
+sudo emerge --ask sys-kernel/linux-firmware
+
+Configure your fstab, look at Mental Outlaw and the gentoo amd64 handbook for more info
+
+vim /etc/conf.d/hostname
+
+hostname="chopsticksPC"
+
+emerge --ask --noreplace net-misc/netifrc
+
+vim /etc/conf.d/net
+
+config_eth0="dhcp"
+
+cd /etc/init.d
+
+ln -s net.lo net.eth0
+
+rc-update add net.eth0 default
+
+vim /etc/hosts
+
+For an example, go on the amd64 handbook or copy the one on your laptop
+
+passwd
+
+Set a root password
+
+vim /etc/rc.conf
+
+Read and change settings accordingly
+
+vim /etc/conf.d/keymaps
+
+Copy the shit from your laptop or just set it to "colemak"
+
+vim /etc/conf.d/hwclock
+
+Edit according to preference
+
+emerge --ask app-admin/sysklogd
+
+rc-update add sysklogd default
+
+emerge --ask sys-process/cronie
+
+rc-update add cronie default
+
+emerge --ask sys-apps/mlocate
+
+rc-update add sshd default
+
+vim  /etc/inittab
+
+Uncomment serial consoles
+
+emerge --ask net-wireless/iw net-wireless/wpa_supplicant net-misc/dhcpcd sys-fs/dosfstools sys-fs/btrfs-progs sys-fs/e2fsprogs dev-vcs/git x11-terms/st
+
+emerge --ask --verbose sys-boot/grub:2
+
+grub-install --target=x86_64-efi --efi-directory=/boot
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+emerge --ask app-admin/sudo
+
+vim /etc/sudoers
+
+Uncomment the sudo use for wheel
+
+emerge --ask media-libs/mesa
+
+emerge --ask x11-base/xorg-x11
+
+env-update
+
+source /etc/profile
+
+Install xrandr and find a way to exec the "xrandrscript.bash" script at start of xorg (try putting the commands it contains in ~/.xinitrc)
+
+sudo emerge --ask x11-wm/dwm
+
+echo XSESSION="dwm" > /etc/env.d/90xsession
+
+If there are any problems, you can check the xorg wiki for gentoo
+
+useradd -m -G users,wheel,audio -s /bin/bash chopsticks
+
+passwd chopsticks
+
+exit
+
+cd
+
+umount -l /mnt/gentoo/dev{/shm,/pts,}
+
+umount -R /mnt/gentoo
+
+reboot

@@ -1,0 +1,17 @@
+ungoogled-chromium
+
+steam
+
+audacious
+
+mpv
+
+qbittorent
+
+libreoffice
+
+surf
+
+retroshare
+
+mumble

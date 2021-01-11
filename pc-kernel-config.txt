@@ -1,0 +1,124 @@
+Device Drivers --->
+	Generic Driver Options --->
+	[*] Maintain a devtmpfs filesystem to mount at /dev
+	[*] Automount devtmpfs at /dev, after the kernel mounted the rootfs
+
+Device Drivers --->
+	SCSI device support --->
+		<*> SCSI disk support
+
+File systems --->
+	<*> Second extended fs support
+	<*> The Extended 3 (ext3) filesystem
+	<*> The Extended 4 (ext4) filesystem
+	<*> Reiserfs support
+	<*> JFS filesystem support
+	<*> XFS filesystem support
+	<*> Btrfs filesystem support
+	DOS/FAT/NT Filesystems --->
+		<*> MSDOS fs support
+		<*> VFAT (windows-95) fs support
+
+Pseudo Filesystems --->
+	[*] /proc file system support
+	[*] Tmpfs virtual memory file system support (former shm fs)
+
+Processor type and features --->
+	[*] Symmetric multi-processing support
+
+Device Drivers --->
+	HID support --->
+		-*- HID bus support
+		<*> Generic HID driver
+		[*] Battery level reporting for HID devices
+		USB HID support --->
+			<*> USB HID transport layer
+	[*] USB support --->
+		<*> xHCI HCD (USB 3.0) support
+		<*> EHCI HCD (USB 2.0) support
+		<*> OHCI HCD (USB 1.1) support
+
+Processor type and features --->
+	[*] Machine Check / overheating reporting
+	[*] Intel MCE Features
+	[] AMD MCE Features
+	Processor family (AMD-Opteron/Athlon64) --->
+		() Opteron/Athlon64/Hammer/K8
+		() Intel P4 / older Netburst based Xeon
+		() Core 2/newer Xeon
+		() Intel Atom
+		(*) Generic-x86-64
+Executable file formats / Emulations --->
+	[*] IA32 Emulation
+
+-*- Enable the block layer --->
+	Partition Types --->
+		[*] Advanced partition selection
+		[*] EFI GUID Partition support
+
+Processor type and features --->
+	[*] EFI runtime service support
+	[*] EFI stup support
+	[*] EFI mixed-mode support
+Firmware Drivers --->
+	EFI (Extensible Firmware Interface) Support --->
+		<*> EFI Variable Support via sysfs
+
+Device Drivers --->
+	Networking support --->
+		[*] Network device support --->
+			[*] Ethernet driver support --->
+
+Processor type and features --->
+	[*] MTRR (Memory Type Range Register) support
+Device Drivers --->
+	Graphics support --->
+		<M> Direct Rendering Manager (XFREe86 4.1.0 and higher DRI suppor) --->
+			[*] Enable legacy fbdev support for your modesetting driver
+			<> ATI Radeon (Important not to enable)
+		<M> AMD GPU
+			[] Enable amdgpu support for SI parts
+			[] Enable amdgpu support for CIK parts
+			[*] Enable AMD powerplay component 
+			ACP (Audio CoProcessor) Configuration --->
+				[*] Enable AMD Audio CoProcessor IP support
+			Display Engine Configuration --->
+				[*] AMD DC - Enable new display engine
+				[*] DCN 3.0 family
+				[*] AMD FBC - Enable Frame Buffer Compression
+			<M> HSA kernel driver for AMD GPU devices
+		<M> Sound card support --->
+			<M> Advanced Linux Sound Architecture --->
+				[*] PCI sound devices --->
+					HD-Audio -->
+						<*> HD Audio PCI
+						[*] Support initialization patch loading for HD-audio
+						<*> whatever audio codec your soundcard needs
+						<*> Build HDMI/DisplayPort HD-audio codec support
+						(2048) Pre-allocated buffer size for HD-audio driver
+
+Device Drivers --->
+	Input device support --->
+	<*> Even interface
+
+Device Drivers --->
+	Graphics support --->
+		Frame Buffer Devices --->
+			<*> Support for frame buffer devices --->
+			Disable all drivers, including VGA, Intel, NVIDIA, and ATI, except EFI-based Framebuffer Support
+		Console display driver support --->
+		<*> Framebuffer Console Support
+
+Device Drivers --->
+	<*> Sound card support --->
+		<*> Advanced Linux Sound Architecture --->
+			(2048) Pre-allocated buffer size for HD-audio driver
+
+General setup --->
+	Timers subsystem --->
+		[*] High Resolution Timer Support
+
+File systems --->
+	Pseudo filesystems --->
+		[*] Tmpfs virtual memory file system support (former shm fs)
+		[*] Tmpfs POSIX Access Control Lists
